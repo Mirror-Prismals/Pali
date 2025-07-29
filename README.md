@@ -1,5 +1,3 @@
-Below is the **Pali Programming Language – Specification v0.1** rendered directly in‑line.
-(Everything is ordinary Markdown, so you can copy–paste it anywhere.)
 
 ---
 
