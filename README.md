@@ -48,7 +48,6 @@ print(main)
 | `#`        | Marks a **callable** reference (`#double"`)                         |
 | `#@`       | Same as `#` but **private** (`#@helper"`)                           |
 | `<~*^`     | Directional *return* arrow, used inside types or expressions        |
-| `f*`, `+-` | Optional visual cues for advanced signatures (not required in v0.1) |
 
 > **Rule of thumb:** if it starts with `$`, the compiler owns it; if it ends in `"`, *you* own it; if it starts with `#`, you can **call** it.
 
