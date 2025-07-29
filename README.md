@@ -22,17 +22,16 @@ Pali is a **general‑purpose, systems‑level** language that targets C/C++/Rus
 | **Core Pali** | `.core`   | Low‑level, performance‑critical truth.                  | *May* mirror High but is not required.              |
 | **High Pali** | `.high`   | Ergonomic façade that always reflects Core definitions. | **Must** mirror a named `.core` file via `$mirror`. |
 ```pali
-$main()                 // entry‑point – must be first line
-// pali.core
+$main() // entry‑point – must be first line
 $define pali.core
 #main" = $str pali
 $print(main)
 ```
 ```pali
-main = pali  // entry‑point – must be first line
-// pali.high
+main() // entry‑point – must be first line
 $define pali.high
 $mirror pali.core
+main = pali
 print(main)
 ```
 
