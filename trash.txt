@@ -1,0 +1,56 @@
+In Pali:
+- Writing `x = y * 2` does nothing — it’s a non-operative fragment.
+- Writing `x" = y" * 2` is syntactically valid but still doesn’t evaluate or assign.
+- Only `#x" = y" * 2 \n x` properly sets the expression to the callable `x"`, but still doesn’t evaluate the expression.
+- The reason it doesn't evaluate is because no part of it has an associated type, so it's not a valid expression in Pali until types are assigned.
+
+In Pali:
+- Function definitions can look like `#x"($int y) = $int y * 2;`, where the return type appears before the expression.
+- Calling this function can be done by simply writing `x` on a new line, or appending `<~*^` after the semicolon to immediately evaluate it.
+- Alternatively, the return type can appear after the expression using syntax like `#x"($int y) = y * 2; <~*^ int`, where the trailing type annotation still belongs to `#x"`.
+- This style is intentionally unusual but visually and structurally expressive.
+
+In Pali, return types must be written with the return sigil `<~*^` following the type, like `$int<~*^`. This visually and semantically links the return type to its flow behavior, reinforcing that the value of this type is being returned.
+
+In Pali, colons are not used in function definitions or type annotations.
+
+In Pali, function parameter names do not end in a double quote (`"`), as that convention is reserved for named functions, variables, and classes. Parameters are treated as regular identifiers and do not follow the `"suffix` rule.
+
+In Pali:
+- `$int pali" = $str pali 
+ @pali 
+` is equivalent to `$int #pali" = $str pali 
+ pali 
+` and also to `$int #@pali" = $str pali 
+ @pali 
+`.
+- Functions can be declared with multiple parameters of different types using syntax like `#main"($str pali = pali, $int pali = 1, $float pali = 1.1)`.
+- Return types can be written either on their own line as `$str<~*^ main 
+` or as a postfix like `main $str<~*^`.
+- This system is complex but logically structured and visually consistent.
+
+Is introducing a new layer called 'High Pali,' which sits on top of Pali. High Pali is a less semantically dense variant of Pali, intended to reduce the need for typing extensive symbolic syntax like `#`, `"`, `^`, `*`, `~`, `>`. It serves as a more ergonomic or shorthand-friendly version of core Pali while preserving its semantics. High Pali is not a separate language that compiles down to Core Pali — both High Pali and Core Pali are part of the same language spec. High Pali is simply a higher-level, less symbol-heavy syntax layer that coexists with the core symbolic layer.
+
+In Pali, High Pali is designed for recursive code-golf-style ergonomics in large codebases. As a project grows, especially in complexity (e.g. Vulkan with 17+ files), Pali encourages constructing higher-level APIs over lower-level systems. The goal is for complexity to scale exponentially in *control*, not in *line count*. That is, as codebases approach 200k lines, adding new functionality should require manipulating existing class-level abstractions, not expanding the file or line count linearly.
+
+In Pali, the design encourages building stable, recursively abstracted systems. Like working in a digital audio workstation (DAW), developers can tweak low-level details (e.g., performance-critical tuning) while building up higher-level abstractions. Pali emphasizes that the speed of a program is determined by the lowest level the developer chooses to program at.
+
+High Pali allows faster development using expressive shortcuts that don’t sacrifice literal performance, but may not expose all the low-level design controls. Core Pali exists for full clarity and control — especially for foundational systems.
+
+Unlike Python, which encourages loosely connected abstractions and dependencies (e.g., many pip packages), Pali promotes fully explicit, in-repo systems. Unlike Rust, where low-level control like inline assembly is used sparingly, Core Pali is expected to be used heavily when building serious infrastructure. High Pali is better suited for later-stage productivity, while Core Pali is ideal for building stable, typed, performance-aware primitives.
+
+In High Pali:
+- Functions can be written in a simplified form like `main = pali`, which under the hood maps to `#main" = $str pali` in Core Pali.
+- Function names are assumed to be `$int` by default.
+- String literals are assumed to be `$str`.
+- Unlike Core Pali, High Pali does not visually distinguish between symbols and values (e.g. no `#`, `"`, or `$`), favoring readability and speed of writing over explicit clarity.
+
+In Pali, writing in High Pali requires also writing out the equivalent Core Pali form alongside it. This reinforces the expert-level nature of the language. Most of the time, developers will be writing both High Pali and Core Pali in tandem, effectively doubling the code but gaining precise control and ergonomic abstraction simultaneously.
+
+In Pali, High Pali and Core Pali must be written in two separate files (e.g., `high.pali` and `core.pali`). This enforces structural clarity and expert-level discipline, requiring developers to maintain both the ergonomic high-level abstraction and its precise, low-level equivalent.
+
+In Pali, files share a base name but use either `.core` or `.high` extensions to indicate Core Pali or High Pali layers. For example, `pali.core` and `pali.high`. Within a High Pali file, directives like `$define pali.high` and `$mirror pali.core` can be used to formally declare the file’s identity and its mirrored Core counterpart.
+
+Is working on a Vulkan Ash Rust project with a 17-file repository including a default cube, window controls, and an FPS camera.
+
+Is training a base language model on pre-1929 books, aiming for around 20 billion unique tokens. This will be one of the largest base model training runs focused exclusively on pre-1929 literature, emphasizing openness and transparency.
