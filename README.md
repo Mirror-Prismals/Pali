@@ -29,8 +29,8 @@ $print(main)
 ```
 ```pali
 main() // entry‑point – must be first line
-$define pali.high
-$mirror pali.core
+define pali.high
+mirror pali.core
 main = pali
 print(main)
 ```
